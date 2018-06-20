@@ -29,16 +29,25 @@ function slideArticles(dir){
 
 function getScroll(){
     let articles = document.querySelectorAll('article');
+    let articlesWrapper = document.querySelector('.articles');
+    let siteHeader = document.querySelector('#site-header');
 
     articles.forEach(article => {
         article.addEventListener('scroll', (e) => {
-            console.log(e.target);
+            
             if(e.target.scrollTop <= 60){
-                window.scrollTo({top:e.target.scrollTop});
+                siteHeader.classList.remove('hidden');
+                articlesWrapper.classList.remove('hidden');
+            }else{
+                //window.scrollTo({top:e.target.scrollTop});
+                siteHeader.classList.add('hidden')
+                articlesWrapper.classList.add('hidden')
             }
 
-            if((e.target.scrollHeight - e.target.scrollTop) >= e.target.clientHeight){
-                console.log('asdads');
+            console.log('scrollHeight: ',e.target.scrollHeight, '\nscrollTop:',e.target.scrollTop, '\nclientHewight: ',e.target.clientHeight );
+
+            if(( e.target.scrollTop + e.target.clientHeight ) < e.target.scrollHeight ){
+                console.log('menor')
             }
         })
     })

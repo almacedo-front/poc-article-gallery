@@ -3,17 +3,24 @@ html, html > body{
 }
 
 #site-header{
-    position: relative;
+    position: fixed;
+    top:0;
     width: 100%;
     max-width: 480px;
     height: 60px;
     margin: 0 auto;
     background-color: #000;
+    transition: top ease-in 0.2s;
+    z-index: 100;
+}
+
+#site-header.hidden{
+    top: -60px;
 }
 
 body > main{
     width: 100%;
-    height: calc(100vh - 60px);
+    height: 100vh;
     max-width: 480px;
     margin: 0 auto;
     overflow: hidden;
@@ -23,16 +30,17 @@ body > main{
 .articles{
     display: flex;
     width: 100%;
-    height: calc(100vh - 60px);
+    height: 100vh;
     margin: 0 auto;
     flex-direction: row;
     overflow: hidden;
 }
 
+
 .articles article{
     position: relative;
     width: 100vw;
-    height: calc(100vh - 60px);
+    padding-top: 60px;
     margin-left: 0;
     flex-shrink: 0;
     flex-grow: 1;
@@ -41,11 +49,12 @@ body > main{
     border: 1px solid #f00;
     box-sizing: border-box;
     transition: margin-left cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+    transition: padding-top ease-in 0.2s;
     overflow: auto;
 }
 
-.articles article div{
-   
+.hidden article{
+    padding-top: 0;
 }
 
 .articles article:odd{
