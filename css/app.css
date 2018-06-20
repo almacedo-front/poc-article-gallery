@@ -1,0 +1,61 @@
+html, html > body{
+    margin: 0;
+}
+
+#site-header{
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    height: 60px;
+    margin: 0 auto;
+    background-color: #000;
+}
+
+body > main{
+    width: 100%;
+    height: calc(100vh - 60px);
+    max-width: 480px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+.articles{
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 60px);
+    margin: 0 auto;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.articles article{
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - 60px);
+    margin-left: 0;
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-wrap: nowrap;
+    background-color: #ff0;
+    border: 1px solid #f00;
+    box-sizing: border-box;
+    transition: margin-left cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+    overflow: auto;
+}
+
+.articles article div{
+   
+}
+
+.articles article:odd{
+    background-color: olivedrab;
+}
+
+footer{
+    width: 100%;
+    height: 230px;
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: #000;
+}
