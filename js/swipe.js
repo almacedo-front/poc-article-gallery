@@ -23,7 +23,6 @@ function slideArticles(dir){
     let firstChild = wrapper.querySelector('article');
     let pos = parseInt(updateCount()*100);
     firstChild.style.marginLeft = `-${pos}vw`;
-    console.log('pos: ',pos, ' total: ', articlesTotal);
     
 }
 
@@ -32,13 +31,21 @@ function getScroll(){
 
     articles.forEach(article => {
         article.addEventListener('scroll', (e) => {
-            console.log(e.target);
+
             if(e.target.scrollTop <= 60){
                 window.scrollTo({top:e.target.scrollTop});
             }
 
-            if((e.target.scrollHeight - e.target.scrollTop) >= e.target.clientHeight){
+            console.log('scrollHeight: ',e.target.scrollHeight, '\nscrollTop: ',e.target.scrollTop, '\nclientHeight: ', e.target.clientHeight);
+
+            /* if((e.target.scrollHeight - e.target.scrollTop) >= e.target.clientHeight){
                 console.log('asdads');
+            } */
+
+            console.log(window.scrollY)
+            if(window.scrollY > 60){
+                console.log('diminuindo: ',window.scrollY)
+                window.scroll({top: (window.scrollY -10)});
             }
         })
     })

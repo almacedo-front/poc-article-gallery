@@ -4,7 +4,7 @@ html, html > body{
 
 #site-header{
     position: relative;
-    width: 100%;
+    width: 100vw;
     max-width: 480px;
     height: 60px;
     margin: 0 auto;
@@ -22,7 +22,8 @@ body > main{
 
 .articles{
     display: flex;
-    width: 100%;
+    width: 100vw;
+    max-width: 480px;
     height: calc(100vh - 60px);
     margin: 0 auto;
     flex-direction: row;
@@ -42,14 +43,6 @@ body > main{
     box-sizing: border-box;
     transition: margin-left cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
     overflow: auto;
-}
-
-.articles article div{
-   
-}
-
-.articles article:odd{
-    background-color: olivedrab;
 }
 
 footer{
