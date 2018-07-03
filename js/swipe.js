@@ -2,7 +2,7 @@ var startX;
 var startY;
 var endX;
 var endY;
-var treshold = 100; //this sets the minimum swipe distance, to avoid noise and to filter actual swipes from just moving fingers
+var treshold = 10; //this sets the minimum swipe distance, to avoid noise and to filter actual swipes from just moving fingers
 var articlesTotal = document.querySelectorAll('article').length;
 var count = 0;
 
@@ -22,8 +22,21 @@ function slideArticles(dir){
     let wrapper = document.querySelector('.articles');
     let firstChild = wrapper.querySelector('article');
     let pos = parseInt(updateCount()*100);
-    firstChild.style.marginLeft = `-${pos}vw`;
-    
+    firstChild.style.marginLeft = `-${pos}vw`;    
+}
+
+function moveArticles(dist){
+    let wrapper = document.querySelector('.articles');
+    let firstChild = wrapper.querySelector('article');
+    let pos = parseInt(updateCount()*100);
+    console.log('dist: ',dist, ' pos: ', pos);
+    if(pos){
+        pos += dist;
+        //console.log(' pos after: ', pos);
+        firstChild.style.marginLeft = `-${pos}vw`;
+    }else{
+        firstChild.style.marginLeft = `-${dist}vw`;
+    }
 }
 
 function getScroll(){
@@ -36,7 +49,7 @@ function getScroll(){
                 window.scrollTo({top:e.target.scrollTop});
             }
 
-            console.log('scrollHeight: ',e.target.scrollHeight, '\nscrollTop: ',e.target.scrollTop, '\nclientHeight: ', e.target.clientHeight);
+            //console.log('scrollHeight: ',e.target.scrollHeight, '\nscrollTop: ',e.target.scrollTop, '\nclientHeight: ', e.target.clientHeight);
 
             /* if((e.target.scrollHeight - e.target.scrollTop) >= e.target.clientHeight){
                 console.log('asdads');
@@ -44,8 +57,8 @@ function getScroll(){
 
             console.log(window.scrollY)
             if(window.scrollY > 60){
-                console.log('diminuindo: ',window.scrollY)
-                window.scroll({top: (window.scrollY -10)});
+                //console.log('diminuindo: ',window.scrollY)
+                //window.scroll({top: (window.scrollY -10)});
             }
         })
     })
@@ -70,6 +83,13 @@ function handleTouch(start,end, cbL, cbR){
          cbR();
        }
   }
+}
+
+function handeTouchMove(dist){
+    if(Math.abs(dist) > treshold){
+        moveArticles(dist);
+    }
+
 }
 
 //writing the callback fn()
@@ -109,6 +129,14 @@ window.onload = function(){
    handleTouch(startX, endX, left, right)
    
  })
+
+ window.addEventListener('touchmove', function(event) {
+    var total = (startX - event.touches[0].pageX);
+    //var total = endX - event.changedTouches[0].clientX;
+    //console.log('screenX:> ',total, ' startX: ', startX);
+    console.log('event.changedTouches[0] ',event);
+    handeTouchMove(total);
+ });
 
  getScroll();
 
